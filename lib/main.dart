@@ -80,9 +80,10 @@ class _FeedState extends State<Feed> {
     return Scaffold(
       floatingActionButton: new FloatingActionButton(
         backgroundColor: androidThemeData.accentColor,
-        child: const Icon(Icons.add),
+        child: const ImageIcon(AssetImage("icons/post_button.png"), color: Colors.white, size: 50),
+        onPressed: () {},
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: Center(
           child: ListView(
             padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
@@ -98,20 +99,21 @@ class _FeedState extends State<Feed> {
             ],
           )),
       bottomNavigationBar: new BottomAppBar(
-          elevation: 50,
+          elevation: 10.0,
           shape: CircularNotchedRectangle(),
-          child: Row(
+          color: Colors.white,
+          child:
+          Padding(
+            padding: EdgeInsets.fromLTRB(5, 0, 5, 5),
+              child: Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Padding(
-                child: Icon(Icons.menu, size: 30, color: Colors.black54,),
-                padding: EdgeInsets.all(12),
-              ),
-              Padding(
-                child: Icon(Icons.account_circle, size: 30, color: Colors.black54),
-                padding: EdgeInsets.all(12),
-              )
+              IconButton(icon: Icon(Icons.menu, size: 35, color: Colors.black54), onPressed: (){},),
+              IconButton(icon: Icon(Icons.account_circle, size: 35, color: Colors.black54), onPressed: (){},),
             ],
-          )), // This trailing comma makes auto-formatting nicer for build methods.
+          ))
+      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
