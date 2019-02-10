@@ -2,14 +2,55 @@ import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
 
-var googleSansMaterialTheme = ThemeData(
+var ralewayMaterialTheme = ThemeData(
   primarySwatch: Colors.lightBlue,
-  fontFamily: "GoogleSans",
+  fontFamily: "Raleway",
   bottomAppBarColor: Colors.white70,
   primaryColor: Colors.lightBlue[100],
-  primaryColorLight: Color.fromRGBO(230,255,255, 1),
-  primaryColorDark: Color.fromRGBO(130,179,201, 1)
+  primaryColorLight: Color.fromRGBO(230, 255, 255, 1),
+  primaryColorDark: Color.fromRGBO(130, 179, 201, 1),
 );
+var cardShape = RoundedRectangleBorder(
+  borderRadius: BorderRadius.circular(4),
+  side: BorderSide(
+      color: Colors.black38,
+      width: 0.3,
+      style: BorderStyle.solid),
+);
+var tempTweet = Card(
+    elevation: 0,
+    shape: cardShape,
+    child: Padding(
+        padding: EdgeInsets.all(20),
+        child: Column(
+          children: <Widget>[
+            Row(
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
+                  child: Icon(Icons.person, size: 60),
+                ),
+                Column(
+                  children: <Widget>[
+                    Text(
+                      "Melanie Joy",
+                      style: TextStyle(
+                          fontSize: 24, fontWeight: FontWeight.w700),
+                    ),
+                    Text("@melaniej – 10h",
+                        style: TextStyle(fontSize: 18))
+                  ],
+                )
+              ],
+            ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+              child: Text(
+                  "Lorem ipsum, swiggity swooty comin for that swoody grommet."
+                      " Mambo 1, 2, 3 4 5. Test tweet 2020 greco"),
+            ),
+          ],
+        )));
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -17,7 +58,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'TweetMD',
-      theme: googleSansMaterialTheme,
+      theme: ralewayMaterialTheme,
       home: Feed(title: 'Feed'),
     );
   }
@@ -26,15 +67,6 @@ class MyApp extends StatelessWidget {
 class Feed extends StatefulWidget {
   Feed({Key key, this.title}) : super(key: key);
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
   final String title;
 
   @override
@@ -42,8 +74,6 @@ class Feed extends StatefulWidget {
 }
 
 class _FeedState extends State<Feed> {
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,29 +82,34 @@ class _FeedState extends State<Feed> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text("Text"),
-          ],
-        ),
-      ),
+          child: ListView(
+            padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+            children: <Widget>[
+              tempTweet,
+              tempTweet,
+              tempTweet,
+              tempTweet,
+              tempTweet,
+              tempTweet,
+              tempTweet,
+              tempTweet,
+            ],
+          )),
       bottomNavigationBar: new BottomAppBar(
           elevation: 50,
           shape: CircularNotchedRectangle(),
           child: Row(
             children: <Widget>[
-              Icon(Icons.menu, size: 60,),
-              Row(mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: <Widget>[
-                Icon(Icons.person, size: 60),
-              ],)
-
+              Padding(
+                child: Icon(Icons.menu, size: 30),
+                padding: EdgeInsets.all(12),
+              ),
+              Padding(
+                child: Icon(Icons.account_circle, size: 30),
+                padding: EdgeInsets.all(12),
+              )
             ],
-
-          )
-      ),// This trailing comma makes auto-formatting nicer for build methods.
+          )), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
