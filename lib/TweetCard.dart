@@ -4,10 +4,14 @@ import 'package:intl/intl.dart';
 import 'Tweet.dart';
 
 class TweetCard extends Card {
-  var tweetShape = RoundedRectangleBorder(
+  final tweetShape = RoundedRectangleBorder(
     borderRadius: BorderRadius.circular(4),
     side:
         BorderSide(color: Colors.black38, width: 0.3, style: BorderStyle.solid),
+  );
+  final buttonShape = RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(20.0),
+      side: BorderSide(color: Colors.black, width: 0.3, style: BorderStyle.solid)
   );
 
   final Tweet tweet;
@@ -78,9 +82,39 @@ class TweetCard extends Card {
                   ],
                 ),
                 Padding(
-                  padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                  padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
                   child: Text(tweet.message),
                 ),
+                // Social Actions
+                ButtonBar(
+                  alignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    OutlineButton(
+                      onPressed: () { return true;},
+                      textTheme: ButtonTextTheme.accent,
+                      shape: buttonShape,
+                      child: Text("reply"),
+                    ),
+                    OutlineButton(
+                      onPressed: () { return true;},
+                      textTheme: ButtonTextTheme.accent,
+                      shape: buttonShape,
+                      child: Text("retweet"),
+                    ),
+                    OutlineButton(
+                      onPressed: () { return true;},
+                      textTheme: ButtonTextTheme.accent,
+                      shape: buttonShape,
+                      child: Text("like"),
+                    ),
+                    OutlineButton(
+                      onPressed: () { return true;},
+                      textTheme: ButtonTextTheme.accent,
+                      shape: buttonShape,
+                      child: Text("share"),
+                    ),
+                  ],
+                )
               ],
             )
         )
