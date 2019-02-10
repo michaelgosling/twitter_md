@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
 
-var ralewayMaterialTheme = ThemeData(
+var androidThemeData = ThemeData(
   primarySwatch: Colors.lightBlue,
   fontFamily: "Raleway",
   bottomAppBarColor: Colors.white70,
   primaryColor: Colors.lightBlue[100],
   primaryColorLight: Color.fromRGBO(230, 255, 255, 1),
   primaryColorDark: Color.fromRGBO(130, 179, 201, 1),
+  accentColor: Colors.lightBlueAccent,
 );
 var cardShape = RoundedRectangleBorder(
   borderRadius: BorderRadius.circular(4),
@@ -58,7 +59,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'TweetMD',
-      theme: ralewayMaterialTheme,
+      theme: androidThemeData,
       home: Feed(title: 'Feed'),
     );
   }
@@ -78,9 +79,10 @@ class _FeedState extends State<Feed> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: new FloatingActionButton(
+        backgroundColor: androidThemeData.accentColor,
         child: const Icon(Icons.add),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       body: Center(
           child: ListView(
             padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
@@ -101,11 +103,11 @@ class _FeedState extends State<Feed> {
           child: Row(
             children: <Widget>[
               Padding(
-                child: Icon(Icons.menu, size: 30),
+                child: Icon(Icons.menu, size: 30, color: Colors.black54,),
                 padding: EdgeInsets.all(12),
               ),
               Padding(
-                child: Icon(Icons.account_circle, size: 30),
+                child: Icon(Icons.account_circle, size: 30, color: Colors.black54),
                 padding: EdgeInsets.all(12),
               )
             ],

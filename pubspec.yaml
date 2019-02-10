@@ -68,18 +68,18 @@ flutter:
   # see https://flutter.io/custom-fonts/#from-packages
 
   fonts:
-  - family: Raleway
+    - family: Raleway
       fonts:
-      - asset: fonts/Raleway-Regular.ttf
-      - asset: fonts/Raleway-Italic.ttf
+        - asset: fonts/Raleway-Regular.ttf
+        - asset: fonts/Raleway-Italic.ttf
           style: italic
-      - asset: fonts/Raleway-Bold.ttf
+        - asset: fonts/Raleway-Bold.ttf
           weight: 700
-      - asset: fonts/Raleway-Medium.ttf
+        - asset: fonts/Raleway-Medium.ttf
           weight: 500
-      - asset: fonts/Raleway-MediumItalic.ttf
+        - asset: fonts/Raleway-MediumItalic.ttf
           style: italic
           weight: 500
-      - asset: fonts/Raleway-BoldItalic.ttf
+        - asset: fonts/Raleway-BoldItalic.ttf
           style: italic
           weight: 700
