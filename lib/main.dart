@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
 
+
 var androidThemeData = ThemeData(
   primarySwatch: Colors.lightBlue,
   fontFamily: "Raleway",
@@ -55,6 +56,7 @@ var tempTweet = Card(
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -85,25 +87,25 @@ class _FeedState extends State<Feed> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: Center(
-          child: ListView(
-            padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-            children: <Widget>[
-              tempTweet,
-              tempTweet,
-              tempTweet,
-              tempTweet,
-              tempTweet,
-              tempTweet,
-              tempTweet,
-              tempTweet,
-            ],
-          )),
+            child: ListView(
+              padding: EdgeInsets.all(5),
+              children: <Widget>[
+                SafeArea(child: tempTweet),
+                tempTweet,
+                tempTweet,
+                tempTweet,
+                tempTweet,
+                tempTweet,
+                tempTweet,
+                tempTweet,
+              ],
+          ),
+      ),
       bottomNavigationBar: new BottomAppBar(
           elevation: 10.0,
           shape: CircularNotchedRectangle(),
           color: Colors.white,
-          child:
-          Padding(
+          child: Padding(
             padding: EdgeInsets.fromLTRB(5, 0, 5, 5),
               child: Row(
             mainAxisSize: MainAxisSize.max,
