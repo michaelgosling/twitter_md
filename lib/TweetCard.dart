@@ -10,8 +10,8 @@ class TweetCard extends Card {
         BorderSide(color: Colors.black38, width: 0.3, style: BorderStyle.solid),
   );
   final buttonShape = RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(20.0),
-      side: BorderSide(color: Colors.black, width: 0.3, style: BorderStyle.solid)
+    borderRadius: BorderRadius.circular(20.0),
+    side: BorderSide(color: Colors.black, width: 0.3, style: BorderStyle.solid),
   );
 
   final Tweet tweet;
@@ -51,17 +51,14 @@ class TweetCard extends Card {
         elevation: 0,
         shape: tweetShape,
         child: Padding(
-            padding: EdgeInsets.all(20),
+            padding: EdgeInsets.fromLTRB(20, 20, 20, 5),
             child: Column(
               children: <Widget>[
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
-                      child: Icon(Icons.person, size: 60),
-                    ),
+                      Icon(Icons.person, size: 60),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,43 +75,37 @@ class TweetCard extends Card {
                           textAlign: TextAlign.start,
                         )
                       ],
-                    )
+                    ),
+                    IconButton(
+                        onPressed: () {return true;},
+                        icon: Icon(Icons.share),
+                    ),
                   ],
                 ),
                 Padding(
                   padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
                   child: Text(tweet.message),
                 ),
-                // Social Actions
+                // Retweet/Reply
                 ButtonBar(
-                  alignment: MainAxisAlignment.spaceEvenly,
+                  alignment: MainAxisAlignment.end,
                   children: <Widget>[
                     OutlineButton(
                       onPressed: () { return true;},
                       textTheme: ButtonTextTheme.accent,
-                      shape: buttonShape,
-                      child: Text("reply"),
-                    ),
-                    OutlineButton(
-                      onPressed: () { return true;},
-                      textTheme: ButtonTextTheme.accent,
+                      padding: EdgeInsets.all(0),
                       shape: buttonShape,
                       child: Text("retweet"),
                     ),
                     OutlineButton(
                       onPressed: () { return true;},
                       textTheme: ButtonTextTheme.accent,
+                      padding: EdgeInsets.all(0),
                       shape: buttonShape,
-                      child: Text("like"),
-                    ),
-                    OutlineButton(
-                      onPressed: () { return true;},
-                      textTheme: ButtonTextTheme.accent,
-                      shape: buttonShape,
-                      child: Text("share"),
+                      child: Text("reply"),
                     ),
                   ],
-                )
+                ),
               ],
             )
         )
