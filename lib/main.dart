@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'Tweet.dart';
 import 'TweetCard.dart';
@@ -14,7 +15,6 @@ var androidThemeData = ThemeData(
   primaryColorDark: Color.fromRGBO(130, 179, 201, 1),
   accentColor: Colors.lightBlueAccent,
 );
-
 
 class TweetMD extends StatelessWidget {
   // This widget is the root of your application.
@@ -84,63 +84,78 @@ class _FeedState extends State<Feed> {
   ];
 
   var drawerListTileTextStyle = TextStyle(
-      fontWeight: FontWeight.w500,
-      fontSize: 16,
-      color: Colors.black87
-  );
+      fontWeight: FontWeight.w500, fontSize: 16, color: Colors.black87);
 
-  void composeTweet(BuildContext context) {
-    showModalBottomSheet(context: context,
-        builder: (BuildContext bc) {
-      // tweet sheet
-      return
-        Padding(
-          padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsets.only(bottom: 10),
-          child: Text("Compose Tweet",
-            style: TextStyle(color: Colors.lightBlue,
-                fontWeight: FontWeight.bold,
-                fontSize: 24),
-            textAlign: TextAlign.left,
-          )),
-          TextField(
-            autofocus: true,
-            maxLength: 280,
-            decoration: InputDecoration(hintText: "Tweet tweet..."),
-            maxLengthEnforced: true,
-            textAlign: TextAlign.justify,
-          ),
-              ButtonBar(
-                alignment: MainAxisAlignment.end,
-              children: <Widget>[
-                OutlineButton(
-                onPressed: () {return true;},
-                textColor: Colors.redAccent,
-                child: Text("Discard"),
-                borderSide: BorderSide(color: Colors.redAccent, width: 0.3, style: BorderStyle.solid),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20.0),
-                ),
-              ),
-              FlatButton(
-                color: Colors.lightBlueAccent,
-                splashColor: Colors.lightBlueAccent,
-                textColor: Colors.white,
-                child: Text("Post"),
-                onPressed: () {return true;},
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20.0),
-                ),
-              )],
-              )
-        ],
-      ));
-    }
+  void composeTweet() {
+    showModalBottomSheet(
+      context: _scaffoldKey.currentContext,
+      builder: (BuildContext bc) {
+        // tweet sheet
+        return new Container(
+            color: Color(0xFF737373),
+            child: new Container(
+                padding: EdgeInsets.only(top: 10, left: 15, right: 15),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: new BorderRadius.only(
+                      topLeft: const Radius.circular(20.0),
+                      topRight: const Radius.circular(20.0),
+                    )),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.max,
+                  children: <Widget>[
+                    Text(
+                      "Compose Tweet",
+                      style: TextStyle(
+                          color: Colors.lightBlue,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 22),
+                      textAlign: TextAlign.left,
+                    ),
+                    TextField(
+                      autofocus: true,
+                      maxLength: 280,
+                      decoration: InputDecoration(hintText: "Tweet tweet..."),
+                      maxLengthEnforced: true,
+                      textAlign: TextAlign.justify,
+                      maxLines: null,
+                    ),
+                    ButtonBar(
+                      alignment: MainAxisAlignment.end,
+                      children: <Widget>[
+                        OutlineButton(
+                          onPressed: () {
+                            return true;
+                          },
+                          textColor: Colors.redAccent,
+                          child: Text("Discard"),
+                          borderSide: BorderSide(
+                              color: Colors.redAccent,
+                              width: 0.3,
+                              style: BorderStyle.solid),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+                        ),
+                        FlatButton(
+                          color: Colors.lightBlueAccent,
+                          splashColor: Colors.lightBlueAccent,
+                          textColor: Colors.white,
+                          child: Text("Post"),
+                          onPressed: () {
+                            return true;
+                          },
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+                        )
+                      ],
+                    ),
+                  ],
+                )));
+      },
     );
   }
 
@@ -148,7 +163,12 @@ class _FeedState extends State<Feed> {
 
   @override
   Widget build(BuildContext context) {
-
+    var mySystemTheme = SystemUiOverlayStyle.light.copyWith(
+        systemNavigationBarColor: Colors.white,
+        statusBarColor: Colors.white,
+        statusBarIconBrightness: Brightness.dark,
+        systemNavigationBarIconBrightness: Brightness.dark);
+    SystemChrome.setSystemUIOverlayStyle(mySystemTheme);
     return Scaffold(
       key: _scaffoldKey,
       drawer: Drawer(
@@ -156,63 +176,92 @@ class _FeedState extends State<Feed> {
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
-              child: InkWell(
-                onTap: (){
-                  _scaffoldKey.currentState.showSnackBar(new SnackBar(content: Text("Profile Opened")));
-                },
-                child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.only(right: 10),
-                    child: Icon(Icons.account_circle, size: 60,),
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text("Your Name", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),
-                      Text("@yourusername", style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal))
-                    ],
-                  )
-                ],
-              ))
-            ),
+                child: InkWell(
+                    onTap: () {
+                      _scaffoldKey.currentState.showSnackBar(
+                          new SnackBar(content: Text("Profile Opened")));
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        Padding(
+                          padding: EdgeInsets.only(right: 10),
+                          child: Icon(
+                            Icons.account_circle,
+                            size: 60,
+                          ),
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(
+                              "Your Name",
+                              style: TextStyle(
+                                  fontSize: 24, fontWeight: FontWeight.bold),
+                            ),
+                            Text("@yourusername",
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.normal))
+                          ],
+                        )
+                      ],
+                    ))),
             ListTile(
-              leading: Icon(Icons.notifications_none, color: Colors.lightBlueAccent,),
+              leading: Icon(
+                Icons.notifications_none,
+                color: Colors.lightBlueAccent,
+              ),
               title: Text("Notifications", style: drawerListTileTextStyle),
-              onTap: () {return true;},
+              onTap: () {
+                return true;
+              },
             ),
             ListTile(
-              leading: Icon(Icons.message, color: Colors.lightBlueAccent,),
+              leading: Icon(
+                Icons.message,
+                color: Colors.lightBlueAccent,
+              ),
               title: Text("Messages", style: drawerListTileTextStyle),
-              onTap: () {return true;},
+              onTap: () {
+                return true;
+              },
             ),
             ListTile(
-              leading: Icon(Icons.collections_bookmark, color: Colors.lightBlueAccent),
+              leading: Icon(Icons.collections_bookmark,
+                  color: Colors.lightBlueAccent),
               title: Text("Bookmarks", style: drawerListTileTextStyle),
-              onTap: () {return true;},
+              onTap: () {
+                return true;
+              },
             ),
             ListTile(
               leading: Icon(Icons.list, color: Colors.lightBlueAccent),
               title: Text("Lists", style: drawerListTileTextStyle),
-              onTap: () {return true;},
+              onTap: () {
+                return true;
+              },
             ),
             Divider(),
-        ListTile(
+            ListTile(
                 leading: Icon(Icons.settings),
-                title: Text("Settings", style: drawerListTileTextStyle,),
-                onTap: () {return true;}
-              ),
+                title: Text(
+                  "Settings",
+                  style: drawerListTileTextStyle,
+                ),
+                onTap: () {
+                  return true;
+                }),
           ],
         ),
       ),
-      floatingActionButton: new FloatingActionButton(
+      floatingActionButton: FloatingActionButton(
         backgroundColor: androidThemeData.accentColor,
         child: const ImageIcon(AssetImage("icons/post_button.png"),
             color: Colors.white, size: 50),
         onPressed: () {
-          composeTweet(_scaffoldKey.currentContext);
+          composeTweet();
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
