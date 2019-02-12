@@ -48,14 +48,16 @@ class TweetCard extends Card {
     }
 
     return Card(
-            elevation: 0,
-            shape: tweetShape,
-            child: Padding(
-                padding: EdgeInsets.fromLTRB(20, 20, 20, 5),
-                child: GestureDetector(
+        elevation: 0,
+        shape: tweetShape,
+        child: Padding(
+            padding: EdgeInsets.fromLTRB(20, 20, 20, 5),
+            child: GestureDetector(
                 onLongPress: () {
                   // TODO: retweet code
-                  Scaffold.of(context).showSnackBar(new SnackBar(content: Text("Retweet"),));
+                  Scaffold.of(context).showSnackBar(new SnackBar(
+                    content: Text("Retweet"),
+                  ));
                 },
                 child: Column(
                   children: <Widget>[
@@ -71,7 +73,8 @@ class TweetCard extends Card {
                             Text(
                               tweet.name,
                               style: TextStyle(
-                                  fontSize: 24, fontWeight: FontWeight.w700),
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.w700),
                               textAlign: TextAlign.start,
                             ),
                             Text(

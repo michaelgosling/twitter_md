@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'Tweet.dart';
 import 'TweetCard.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(TweetMD());
 
 var androidThemeData = ThemeData(
   primarySwatch: Colors.lightBlue,
@@ -15,7 +15,8 @@ var androidThemeData = ThemeData(
   accentColor: Colors.lightBlueAccent,
 );
 
-class MyApp extends StatelessWidget {
+
+class TweetMD extends StatelessWidget {
   // This widget is the root of your application.
 
   @override
@@ -82,9 +83,71 @@ class _FeedState extends State<Feed> {
         "My job is getting old, and I want to pluck a cactus. A hint of casual tapestries, you see. #healthydiet #randomtweet"),
   ];
 
+  var drawerListTileTextStyle = TextStyle(
+      fontWeight: FontWeight.w500,
+      fontSize: 16,
+      color: Colors.black87
+  );
+
+  GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
+      key: _scaffoldKey,
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.only(right: 10),
+                    child: Icon(Icons.account_circle, size: 60,),
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text("Your Name", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),
+                      Text("@yourusername", style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal))
+                    ],
+                  )
+                ],
+              )
+            ),
+            ListTile(
+              leading: Icon(Icons.notifications_none, color: Colors.lightBlueAccent,),
+              title: Text("Notifications", style: drawerListTileTextStyle),
+              onTap: () {return true;},
+            ),
+            ListTile(
+              leading: Icon(Icons.message, color: Colors.lightBlueAccent,),
+              title: Text("Messages", style: drawerListTileTextStyle),
+              onTap: () {return true;},
+            ),
+            ListTile(
+              leading: Icon(Icons.collections_bookmark, color: Colors.lightBlueAccent),
+              title: Text("Bookmarks", style: drawerListTileTextStyle),
+              onTap: () {return true;},
+            ),
+            ListTile(
+              leading: Icon(Icons.list, color: Colors.lightBlueAccent),
+              title: Text("Lists", style: drawerListTileTextStyle),
+              onTap: () {return true;},
+            ),
+            Divider(),
+        ListTile(
+                leading: Icon(Icons.settings),
+                title: Text("Settings", style: drawerListTileTextStyle,),
+                onTap: () {return true;}
+              ),
+          ],
+        ),
+      ),
       floatingActionButton: new FloatingActionButton(
         backgroundColor: androidThemeData.accentColor,
         child: const ImageIcon(AssetImage("icons/post_button.png"),
@@ -114,7 +177,9 @@ class _FeedState extends State<Feed> {
                 children: <Widget>[
                   IconButton(
                     icon: Icon(Icons.menu, size: 35, color: Colors.black54),
-                    onPressed: () {},
+                    onPressed: () {
+                      _scaffoldKey.currentState.openDrawer();
+                    },
                   ),
                   IconButton(
                     icon: Icon(Icons.search, size: 35, color: Colors.black54),
