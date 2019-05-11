@@ -1,5 +1,3 @@
-
-
 class Tweet {
   String name;
   String handle;
@@ -7,5 +5,4 @@ class Tweet {
   String message;
 
   Tweet(this.name, this.handle, this.dateTime, this.message);
-
 }
